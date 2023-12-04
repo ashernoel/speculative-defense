@@ -20,16 +20,26 @@ fi
 
 for data_offset in 1 11 21 31 41 51 61 71 81 91
 do
-
     python3 -u ../main.py \
         --config="../configs/individual_${model}.py" \
         --config.attack=gcg \
-        --config.train_data="../../data/advbench/harmful_${setup}.csv" \
+        --config.train_data="../../data/advbench/positive_${setup}.csv" \
         --config.result_prefix="../results/individual_${setup}_${model}_gcg_offset${data_offset}" \
         --config.n_train_data=50 \
         --config.data_offset=$data_offset \
-        --config.n_steps=50 \
-        --config.test_steps=50 \
+        --config.n_steps=10 \
+        --config.test_steps=10 \
         --config.batch_size=512
+
+    # python3 -u ../main.py \
+    #     --config="../configs/individual_${model}.py" \
+    #     --config.attack=gcg \
+    #     --config.train_data="../../data/advbench/harmful_${setup}.csv" \
+    #     --config.result_prefix="../results/individual_${setup}_${model}_gcg_offset${data_offset}" \
+    #     --config.n_train_data=50 \
+    #     --config.data_offset=$data_offset \
+    #     --config.n_steps=50 \
+    #     --config.test_steps=50 \
+    #     --config.batch_size=512
 
 done
