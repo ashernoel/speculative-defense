@@ -6,6 +6,9 @@ import torch.multiprocessing as mp
 from absl import app
 from ml_collections import config_flags
 
+import sys 
+# Add the folder to the Python path
+sys.path.append('/n/home10/anoel/llm-attacks')
 from llm_attacks import get_goals_and_targets, get_workers
 
 _CONFIG = config_flags.DEFINE_config_file('config')
