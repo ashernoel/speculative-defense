@@ -172,7 +172,7 @@ def generate_defended(
             next_token = next_token_logits.argmax(dim=-1).unsqueeze(-1)
             print("NEXT TOKEN!!!: ", tokenizer.decode(next_token.view(-1), skip_special_tokens=True))
 
-            # if the token is YES or yes (use.lower() == "yes") then set illegal_found to TRue and break
+            # # if the token is YES or yes (use.lower() == "yes") then set illegal_found to TRue and break
             if tokenizer.decode(next_token.view(-1), skip_special_tokens=True).lower() == "yes":
                 illegal_found = True
                 break
@@ -1807,8 +1807,14 @@ class ModelWorker(object):
             trust_remote_code=True,
             **model_kwargs
         ).to(device).eval()
-        self.model.fine_tuned_model = PeftModel.from_pretrained(self.model, "/n/home10/anoel/vicuna-7b-v1.3/tuned")
-        self.model.fine_tuned_model = self.model.fine_tuned_model.merge_and_unload()
+        self.model.fine_tuned_model = AutoModelForCausalLM.from_pretrained(
+            "/n/home10/anoel/vicuna-7b-v1.3",
+            torch_dtype=torch.float16,
+            trust_remote_code=True,
+            **model_kwargs
+        ).to(device).eval()
+        # self.model.fine_tuned_model = PeftModel.from_pretrained(self.model, "/n/home10/anoel/vicuna-7b-v1.3/tuned")
+        # self.model.fine_tuned_model = self.model.fine_tuned_model.merge_and_unload()
         self.tokenizer = tokenizer
         self.conv_template = conv_template
         self.tasks = mp.JoinableQueue()
