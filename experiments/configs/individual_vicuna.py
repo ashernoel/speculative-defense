@@ -10,10 +10,10 @@ def get_config():
     print(config)
     # config.result_prefix = 'results/individual_vicuna'
     config.model_paths = [
-        "/n/home10/anoel/vicuna-7b-v1.3/"
+        "/n/home10/anoel/vicuna-13b-v1.3/"
     ]
     config.tokenizer_paths = [
-        "/n/home10/anoel/vicuna-7b-v1.3/"
+        "/n/home10/anoel/vicuna-13b-v1.3/"
     ]
     # config.conversation_templates=['vicuna']
 
